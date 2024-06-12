@@ -17,7 +17,7 @@ export function ChannelContextProvider({ children }: { children: ReactNode }) {
 
   const login = (username: string) => {
     socketRef.current?.emit("user:login", username);
-    setUsername(username);
+    localStorage.setItem("username", username);
   };
 
   useEffect(() => {
