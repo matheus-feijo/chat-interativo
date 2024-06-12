@@ -35,13 +35,13 @@ export class Chat {
     });
   }
 
-  createdMessage(channelId, userName, message) {
+  createdMessage(channelId, username, message) {
     const channel = this.channels.find((channel) => channel.id === channelId);
 
     if (!channel) return false;
 
     channel.messages.push({
-      username: userName,
+      username,
       content: message,
       createdAt: Date.now()
     });

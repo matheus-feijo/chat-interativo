@@ -8,7 +8,6 @@ interface IChannelContext {
   channels: IChannel[];
   channel: IChannel | undefined;
   joinChannel: (id: number) => void;
-  leaveChannel: () => void;
   username: string;
 }
 
@@ -16,26 +15,36 @@ export const ChannelContext = createContext({} as IChannelContext);
 
 export function ChannelContextProvider({ children }: { children: ReactNode }) {
   const socketRef = useRef<Socket>();
-  const [username, setUsername] = useState("");
   const [channelList, setChannelList] = useState<IChannel[]>([]);
   const [channel, setChannel] = useState<IChannel>();
+  const [username, setUsername] = useState("");
 
-  const login = (username: string) => {
-    socketRef.current?.emit("user:login", username);
-    localStorage.setItem("username", username);
+  const login = (name: string) => {
+    socketRef.current?.emit("user:login", name);
+    setUsername(name);
   };
 
-  const joinChannel = (id: number) => {};
+  const joinChannel = (id: number) => {
+    socketRef.current?.emit("channel:join", id);
+  };
 
-  const leaveChannel = () => {};
-
-  const createMessage = (message: string) => {};
+  const createMessage = (message: string) => {
+    socketRef.current?.emit("message:create", {
+      channelId: channel?.id,
+      username: username,
+      message,
+    });
+  };
 
   useEffect(() => {
     socketRef.current = io("http://localhost:3333");
 
     socketRef.current.on("channels:get", (data) => {
       setChannelList(data);
+    });
+
+    socketRef.current.on("channel:get", (data) => {
+      setChannel(data);
     });
   }, []);
 
@@ -46,7 +55,6 @@ export function ChannelContextProvider({ children }: { children: ReactNode }) {
         channel,
         joinChannel,
         createMessage,
-        leaveChannel,
         login,
         username,
       }}

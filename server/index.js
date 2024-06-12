@@ -13,7 +13,7 @@ const chat = new ChatModel();
 io.on("connection", (socket) => {
   socket.on("user:login", (userName) => {
     console.log(`${userName} logged in`);
-    
+
     socket.emit("channels:get", chat.getChannels());
   });
 
@@ -29,8 +29,8 @@ io.on("connection", (socket) => {
     io.to(channelId).emit("channel:get", chat.getChannel(channelId));
   });
 
-  socket.on("message:create", ({ channelId, userName, message }) => {
-    chat.createdMessage(channelId, userName, message);
+  socket.on("message:create", ({ channelId, username, message }) => {
+    chat.createdMessage(channelId, username, message);
 
     io.to(channelId).emit("channel:get", chat.getChannel(channelId));
   });

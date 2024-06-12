@@ -21,7 +21,6 @@ export function ChannelList() {
             height: 50,
           }}
           onClick={() => {
-            localStorage.removeItem("username");
             navigate("/");
           }}
         >
