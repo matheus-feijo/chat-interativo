@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useChannelContext } from "../../hooks/useChannelContext";
 import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 
 export function Chat() {
-  const { createMessage, channel, joinChannel } = useChannelContext();
   const { channelId } = useParams<{ channelId?: string }>();
+  const navigate = useNavigate();
+  const { createMessage, channel, joinChannel } = useChannelContext();
   const [message, setMessage] = useState("");
   const divMessageRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +22,17 @@ export function Chat() {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}># {channel?.name}</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1># {channel?.name}</h1>
+
+        <button onClick={() => navigate("/channels")}>Voltar</button>
+      </div>
 
       <div
         style={{
