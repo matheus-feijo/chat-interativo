@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useChannelContext } from "../../hooks/useChannelContext";
 
 export function ChannelList() {
-  const { channelList } = useChannelContext();
+  const { channels } = useChannelContext();
   const navigate = useNavigate();
 
   return (
@@ -30,10 +30,10 @@ export function ChannelList() {
       </div>
 
       <ul>
-        {channelList.map((channel) => {
+        {channels.map((channel) => {
           return (
             <li key={channel.id}>
-              <Link to={`/channel/${channel.id}`}>{channel.name}</Link>
+              <Link to={`/channels/${channel.id}`}>{channel.name}</Link>
             </li>
           );
         })}

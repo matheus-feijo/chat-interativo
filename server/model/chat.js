@@ -41,8 +41,8 @@ export class Chat {
     if (!channel) return false;
 
     channel.messages.push({
-      userName,
-      message,
+      username: userName,
+      content: message,
       createdAt: Date.now()
     });
   }

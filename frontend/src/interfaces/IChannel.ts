@@ -2,7 +2,7 @@ import { IMessage } from "./IMessage";
 
 export interface IChannel {
   messages: IMessage[];
-  id: string;
+  id: number;
   name: string;
   createdAt: number;
   participants: string[];
