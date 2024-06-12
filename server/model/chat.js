@@ -24,6 +24,7 @@ export class Chat {
       id: uuid(),
       name: name,
       messages: [],
+      createdAt: Date.now()
     });
   }
 
@@ -35,6 +36,7 @@ export class Chat {
     channel.messages.push({
       userName,
       message,
+      createdAt: Date.now()
     });
   }
 
