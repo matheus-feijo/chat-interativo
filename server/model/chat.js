@@ -15,7 +15,15 @@ import { v4 as uuid } from "uuid";
 // ]
 
 export class Chat {
-  channels = [];
+  channels = [
+    {
+
+      name: "Geral",
+      id: 0,
+      messages: [],
+      participants: 0
+    }
+  ];
 
   createChannel(name) {
     if (this.channels.find((channel) => channel.name === name)) return false;
@@ -24,7 +32,6 @@ export class Chat {
       id: uuid(),
       name: name,
       messages: [],
-      createdAt: Date.now()
     });
   }
 
