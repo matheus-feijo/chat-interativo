@@ -6,13 +6,14 @@
 ```
 npm i
 ```
+
 * Iniciar Frontend
-  ```
+```
 npm run dev
 ```
 
 * Iniciar backend
-  ```
+```
 npm start
 ```
 
