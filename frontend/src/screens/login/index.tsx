@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useChannelContext } from "../../hooks/useChannelContext";
 
 export function Login() {
   const navigate = useNavigate();
+  const { login } = useChannelContext();
   const [username, setUsername] = useState("");
 
   return (
@@ -11,6 +13,8 @@ export function Login() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
+          login(username);
+          setUsername("");
           navigate("/channels");
         }}
       >

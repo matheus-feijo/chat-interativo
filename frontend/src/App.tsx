@@ -1,12 +1,7 @@
-import { ChannelContextProvider } from "./contexts/ChannelContext";
 import { Routers } from "./routes";
 
 function App() {
-  return (
-    <ChannelContextProvider>
-      <Routers />
-    </ChannelContextProvider>
-  );
+  return <Routers />;
 }
 
 export default App;
